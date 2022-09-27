@@ -2,24 +2,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useEffect, useState} from 'react'
+import Error from './404'
 
-export default function Home() {
-  const [state, setState] = useState({})
+export default function Home( {data} ) {
+  const [state, setState] = useState(data)
 
-  useEffect(() => {
-    async function myFetch() {
-      const data = await fetch(`/api/currency`)
-      let log = await data.json()
-      setState(log)
-    }
-    myFetch()
-  }, [])
 
   useEffect(() => {
     setInterval(async () => {
-      const data = await fetch(`/api/currency`)
-      let log = await data.json()
-      setState(log)
+      const data = await (await fetch(`/api/currency`))?.json()
+      setState(data)
     }, 10000)
   }, [])
   
@@ -30,4 +22,23 @@ export default function Home() {
       </p>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const data = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
+
+  if (!data) {
+    return {
+      redirect: {
+        destination: '/error',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props: {
+      data
+    }
+  }
 }

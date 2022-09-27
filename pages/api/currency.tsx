@@ -11,6 +11,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       rate: 10+Math.random()*50, 
     })
   } catch (error) {
-    res.status(400).json({ error })
+    res.status(401).json({ error })
   }
 }
+
