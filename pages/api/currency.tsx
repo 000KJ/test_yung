@@ -2,9 +2,13 @@
 
 import { NextApiRequest, NextApiResponse } from "next"
 
+type Data = {
+  currency: string,
+  rate: number,
+  // error: string,
+}
 
-
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
     res.status(200).json({
       currency: 'RUB/USD',

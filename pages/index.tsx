@@ -1,18 +1,23 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {useEffect, useState} from 'react'
-import Error from './404'
+import { useEffect, useState } from 'react'
+import { GetServerSideProps } from 'next'
+import { MyHome } from '../interfaces/postTypes'
 
-export default function Home( {data} ) {
+interface PageTypesProps {
+  data: MyHome[]
+}
+
+
+export default function Home( {data}: PageTypesProps ) {
   const [state, setState] = useState(data)
-
 
   useEffect(() => {
     setInterval(async () => {
       const data = await (await fetch(`/api/currency`))?.json()
       setState(data)
-    }, 10000)
+    }, 1000)
   }, [])
   
   return (
@@ -24,21 +29,23 @@ export default function Home( {data} ) {
   )
 }
 
-export async function getServerSideProps() {
-  const data = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
+export const getStaticProps: GetServerSideProps = async () => {
 
+  const data = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
+  
   if (!data) {
     return {
       redirect: {
-        destination: '/error',
+        destination: '/404',
         permanent: false
       }
     }
   }
-
+  
   return {
     props: {
       data
     }
   }
+
 }
