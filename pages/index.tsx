@@ -29,7 +29,7 @@ export default function Home( {data} ) {
   )
 }
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const ServerSideProps: GetServerSideProps = async () => {
 
   const data = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
   
