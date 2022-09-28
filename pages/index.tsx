@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { MyHome } from '../interfaces/postTypes'
 
-// interface PageTypesProps {
-//   data: MyHome[]
-// }
+interface PageTypesProps {
+  data: MyHome[]
+}
 
 
-export default function Home( {data} ) {
+export default function Home( {data}: PageTypesProps ) {
   const [state, setState] = useState(data)
 
   useEffect(() => {
