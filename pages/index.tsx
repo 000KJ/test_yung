@@ -15,7 +15,7 @@ export default function Home( {data} ) {
 
   useEffect(() => {
     setInterval(async () => {
-      const data = await (await fetch(`/api/currency`))?.json()
+      const data = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
       setState(data)
     }, 10000)
   }, [])
@@ -31,7 +31,7 @@ export default function Home( {data} ) {
 
 export const getStaticProps: GetServerSideProps = async () => {
 
-  const data = await (await fetch(`/api/currency`))?.json()
+  const data = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
   
   if (!data) {
     return {
