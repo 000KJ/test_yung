@@ -9,13 +9,13 @@ type Data = {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  try {
+  // try {
     res.status(200).json({
       currency: 'RUB/USD',
       rate: 10+Math.random()*50, 
     })
-  } catch (error) {
-    res.status(401).json({ error })
-  }
+  // } catch (error) {
+  //   res.status(401).json({ error })
+  // }
 }
 
