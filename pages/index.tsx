@@ -6,7 +6,7 @@ import { GetServerSideProps } from 'next'
 import { MyHome } from '../interfaces/postTypes'
 
 interface PageTypesProps {
-  data: MyHome[]
+  data: MyHome
 }
 
 
