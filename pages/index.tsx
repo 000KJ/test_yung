@@ -22,25 +22,31 @@ export default function Home( {data}: PageTypesProps ) {
   
   return (
     <div className="h-14 bg-gradient-to-r from-purple-500 to-pink-500">
+      {'error' in state ? 
+      <p className="text-center" >
+        Ошибка: {state.error}
+      </p>
+      :
       <p className="text-center" >
         Курс {state.currency}: {state.rate}
       </p>
+      }
     </div>
   )
 }
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
 
   const data: MyHome = await (await fetch(`${process.env.API_URL}/api/currency`))?.json()
   
-  if (!data) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false
-      }
-    }
-  }
+  // if (!data) {
+  //   return {
+  //     redirect: {
+  //       destination: '/404',
+  //       permanent: false
+  //     }
+  //   }
+  // }
   
   return {
     props: {
