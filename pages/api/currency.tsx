@@ -1,13 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 import { NextApiRequest, NextApiResponse } from "next"
+import { MyHome } from '../../interfaces/postTypes'
 
-type Data = {
-  currency: string,
-  rate: number,
-} | { error: string }
-
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<MyHome>) {
   try {
     res.status(200).json({
       currency: 'RUB/USD',
