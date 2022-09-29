@@ -17,7 +17,7 @@ export default function Home( {data}: PageTypesProps ) {
     setInterval(async () => {
       const data: MyHome = await (await fetch(`/api/currency`))?.json()
       setState(data)
-    }, 10000)
+    }, 1000)
   }, [])
   
   return (
