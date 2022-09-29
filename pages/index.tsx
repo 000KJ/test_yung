@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { GetServerSideProps } from 'next'
 import { MyHome } from '../interfaces/postTypes'
@@ -17,7 +14,7 @@ export default function Home( {data}: PageTypesProps ) {
     setInterval(async () => {
       const data: MyHome = await (await fetch(`/api/currency`))?.json()
       setState(data)
-    }, 1000)
+    }, 10000)
   }, [])
   
   return (
