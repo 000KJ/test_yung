@@ -5,8 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 type Data = {
   currency: string,
   rate: number,
-  // error: string,
-}
+} | { error: string }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
@@ -14,8 +13,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
       currency: 'RUB/USD',
       rate: 10+Math.random()*50, 
     })
-  } catch (error) {
-    res.status(401).json({ error })
+  } catch (err) {
+    res.status(401).json({ error: err.message })
   }
 }
 
